@@ -20,6 +20,7 @@
     {% for course in courses %}
     {% if regi.course.id == course.id %}
     {% if not regi.canceled %}
+    {% if course.active %}
         <tr>
         <td>{{ course.name }}</td>
         <td><small style="color: #888">{{ course.description }}</small></td>
@@ -27,6 +28,7 @@
         <td>{{ course.end_date }}</td>
         <td><a class="btn btn-danger" href="/unregister/{{ course.id }}">Unregister</button></td>
         </tr>
+    {% endif %}
     {% endif %}
     {% endif %}
     {% endfor %}
