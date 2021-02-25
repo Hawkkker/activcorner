@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse">
+      <tr>
+        <td class="nav-item active">
+          <a class="nav-link" href="/">All Courses</a>
+        </td>
+        <td class="nav-item active">
+          <a class="nav-link" href="/mycourses">My Courses</a>
+        </td>
+        {% if user.is_authenticated %}
+        <td class="nav-item active">
+          <a class="btn btn-secondary" href="{% url 'logout' %}">Log Out</a>
+        </td>
+        {% else %}
+        <td>
+          <a href="{% url 'login' %}">Log In</a>
+        </td>
+        <td>
+          <a class="btn btn-primary" href="{% url 'signup' %}">Sign Up</a>
+        </td>
+        {% endif %}
+      </tr>
+    </div>
+  </nav>
+  {% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends 'home.html' %}
+
+{% block title %}All Courses{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h2>All courses</h2>
+<table class="table table-stripped table-responsive-md btn-table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Registered</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for course in courses %}
+    {% if course.active %}
+        <tr>
+        <td>{{ course.name }}</td>
+        <td><small style="color: #888">{{ course.description }}</small></td>
+        <td>{{ course.start_date }}</td>
+        <td>{{ course.end_date }}</td>
+        <td>
+            {% for regi in registration %} 
+            {% if regi.course.id == course.id %} 
+            {% if not regi.canceled %}
+            <a class="btn btn-danger" href="/unregister/{{ course.id }}">Unregister</button>
+            {% else %}
+            <a class="btn btn-primary" href="/register/{{ course.id }}">Register</button>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </td>
+        </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+  <p>You are not logged in</p>
+{% endif %}
+{% endblock %}
