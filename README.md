@@ -15,3 +15,7 @@
 ```bash
 > python manage.py runserver
 ```
+Access it on http://127.0.0.1:8000
+
+
+Create and modify course(s) and registration(s) on http://127.0.0.1:8000/admin/
