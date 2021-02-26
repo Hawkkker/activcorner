@@ -24,15 +24,11 @@
         <td>{{ course.start_date }}</td>
         <td>{{ course.end_date }}</td>
         <td>
-            {% for regi in registration %} 
-            {% if regi.course.id == course.id %} 
-            {% if not regi.canceled %}
-            <a class="btn btn-danger" href="/unregister/{{ course.id }}">Unregister</button>
+            {% if course.registration %}
+                <a class="btn btn-danger" href="/unregister/{{ course.id }}">Unregister</button>
             {% else %}
-            <a class="btn btn-primary" href="/register/{{ course.id }}">Register</button>
+                <a class="btn btn-primary" href="/register/{{ course.id }}">Register</button>
             {% endif %}
-            {% endif %}
-            {% endfor %}
         </td>
         </tr>
     {% endif %}
