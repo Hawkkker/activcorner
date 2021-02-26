@@ -14,7 +14,14 @@ def allCourses(request):
     if user.is_authenticated:
         courses = Course.objects.all().order_by('start_date')
         registration = Registration.objects.filter(user=user)
-        return render(request, os.path.join(settings.BASE_DIR, 'templates', 'courses', 'courses.html'), {'courses': courses, 'registration': registration})
+        for course in courses:
+            for regi in registration:
+                if regi.course.id == course.id and not regi.canceled:
+                    course.registration = True
+                    break
+                else:
+                    course.registration = False
+        return render(request, os.path.join(settings.BASE_DIR, 'templates', 'courses', 'courses.html'), {'courses': courses})
     else:
         return render(request, os.path.join(settings.BASE_DIR, 'templates', 'courses', 'courses.html'))
 
