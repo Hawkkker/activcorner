@@ -4,6 +4,8 @@
 ```bash
 > pipenv install django~=3.1.0
 > pipenv shell
+> python manage.py makemigrations
+> python manage.py migrate
 ```
 
 ## Create SuperUser
